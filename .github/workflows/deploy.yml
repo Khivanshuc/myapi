@@ -10,7 +10,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v4
 
     - name: Setup .NET
@@ -19,9 +19,9 @@ jobs:
         dotnet-version: '8.0.x'
 
     - name: Publish
-      run: dotnet publish WebApi/WebApi.csproj -c Release -o publish
+      run: dotnet publish -c Release -o publish
 
-    - name: Upload to MonsterASP
+    - name: Upload to MonsterASP via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
