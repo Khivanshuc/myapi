@@ -29,3 +29,8 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: publish/
         server-dir: /wwwroot/
+        dangerous-clean-slate: false
+        exclude: |
+          **/.ftp-deploy-sync-state.json
+          **/private/**
+
