@@ -21,7 +21,7 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release -o publish
 
-    - name: Upload to MonsterASP via FTP
+    - name: Upload to MonsterASP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
@@ -30,7 +30,11 @@ jobs:
         local-dir: publish/
         server-dir: /wwwroot/
         dangerous-clean-slate: false
+        passive: true
         exclude: |
           **/.ftp-deploy-sync-state.json
           **/private/**
+          **/*.exe
+          **/*.pdb
+
 
