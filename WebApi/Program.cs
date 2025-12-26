@@ -13,13 +13,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var connectionString =
+    builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseMySql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        ServerVersion.AutoDetect(
-            builder.Configuration.GetConnectionString("DefaultConnection")
-        )
-    ));
+        connectionString,
+        new MySqlServerVersion(new Version(8, 0, 34))
+    )
+);
+
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
